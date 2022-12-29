@@ -106,6 +106,7 @@ class Question(models.Model):
     lesson = models.ForeignKey(Lesson, on_delete=models.CASCADE)
     question_text = models.CharField(max_length=500)
     grade = models.IntegerField(default=0)
+    course = models.ManyToManyField(Course)
 
     # model method to calculate if learner get the score of the question
     def is_get_score(self, selected_ids):
@@ -129,5 +130,5 @@ class Choice(models.Model):
     is_correct = models.BooleanField()
 
 class Submission(models.Model):
-   enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
-   chocies = models.ManyToManyField(Choice)
+    enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
+    choices = models.ManyToManyField(Choice)
